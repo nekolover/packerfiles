@@ -1,4 +1,7 @@
 {
+    "variables": {
+        "root_password": null
+    },
     "builders":
         [
         {
@@ -32,6 +35,14 @@
                 " text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos6-ks.cfg",
                 "<enter>"
                 ]
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "inline": [
+                "echo root:{{user `root_password`}} | passwd"
+            ]
         }
     ]
 }
